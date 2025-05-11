@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turismo en mexico - Vive México sin preocupaciones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --text: #333;
+            --light: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3') no-repeat center center/cover;
+            color: var(--light);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: var(--primary);
+        }
+        
+        .header-content {
+            margin-top: 3rem;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--light);
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Tours Section */
+        .tours {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tour-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tour-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .tour-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .tour-card:hover .tour-img img {
+            transform: scale(1.1);
+        }
+        
+        .tour-info {
+            padding: 1.5rem;
+        }
+        
+        .tour-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .tour-info .price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .tour-info .duration {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .tour-info .duration i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: var(--accent);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--accent);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info ul {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                order: -1;
+            }
+            
+            nav {
+                position: static;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    
+/* Menu Hamburguesa */
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        border-radius: 5px;
+        align-items: center;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    
+    nav ul li {
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+.hamburger {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 101;
+}
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        border-radius: 5px;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        text-align: right;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav a {
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+}
+
+</style>
+</head>
+<body>
+    <!-- Header with Hero Image -->
+    <header>
+        <div class="logo"> Turismo <span>Mexicano</span></span></div>
+        <div class="hamburger" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</div>
+<nav id="navMenu">
+            <ul>
+                <li><a href="#tours">Tours</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <h1>Vive México sin preocupaciones</h1>
+            <p>Descubre los rincones más mágicos de México con nuestros tours personalizados. Nos encargamos de todo para que tú solo te preocupes por disfrutar.</p>
+            <a href="#tours" class="btn">Ver Tours</a>
+        </div>
+    </header>
+
+    <!-- Tours Section -->
+    <section id="tours" class="tours">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Tours Populares</h2>
+            </div>
+            <div class="tours-grid">
+                <!-- Tour 1 -->
+                <div class="tour-card">
+                    <div class="tour-img">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3" alt="Tour Orizaba">
+                    </div>
+                    <div class="tour-info">
+                        <h3>Orizaba Mágico</h3>
+                        <div class="price">$1,200 MXN</div>
+                        <div class="duration">
+                            <i class="fas fa-clock"></i> 1 día completo
+                        </div>
+                        <p>Descubre los secretos mejor guardados de Orizaba, desde su arquitectura hasta sus paisajes naturales.</p>
+                        <a href="#contact" class="btn">Reservar</a>
+                    </div>
+                </div>
+                
+                <!-- Tour 2 -->
+                <div class="tour-card">
+                    <div class="tour-img">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3" alt="Tour Café">
+                    </div>
+                    <div class="tour-info">
+                        <h3>Ruta del Café</h3>
+                        <div class="price">$1,800 MXN</div>
+                        <div class="duration">
+                            <i class="fas fa-clock"></i> 2 días / 1 noche
+                        </div>
+                        <p>Experiencia sensorial por las fincas cafetaleras de la región, con degustaciones y proceso de producción.</p>
+                        <a href="#contact" class="btn">Reservar</a>
+                    </div>
+                </div>
+                
+                <!-- Tour 3 -->
+                <div class="tour-card">
+                    <div class="tour-img">
+                        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3" alt="Tour Cascadas">
+                    </div>
+                    <div class="tour-info">
+                        <h3>Cascadas Secretas</h3>
+                        <div class="price">$1,500 MXN</div>
+                        <div class="duration">
+                            <i class="fas fa-clock"></i> 1 día completo
+                        </div>
+                        <p>Aventura por las cascadas menos conocidas de la región, con caminata moderada y baño en pozas naturales.</p>
+                        <a href="#contact" class="btn">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>¿Por qué elegirnos?</h2>
+                    <p>En Turismo mexicano nos apasiona mostrar la belleza de México a través de experiencias auténticas y personalizadas. Nuestros tours están diseñados para aquellos que buscan algo más allá del turismo convencional.</p>
+                    <p>Con más de 5 años de experiencia, hemos perfeccionado cada itinerario para ofrecerte el equilibrio perfecto entre actividades guiadas y tiempo libre para explorar por tu cuenta.</p>
+                    <p>Nuestros guías locales expertos te llevarán por caminos menos transitados, compartiendo historias y secretos que solo los locales conocen.</p>
+                    <a href="#contact" class="btn">Contáctanos</a>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3" alt="Equipo  Mexican">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros clientes</h2>
+            </div>
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>La mejor experiencia de viaje que he tenido en México. El tour de cascadas superó todas mis expectativas. ¡Volveré pronto para probar sus otros tours!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Martínez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ana Martínez</h4>
+                            <p>Ciudad de México</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Como viajero frecuente, valoro mucho la atención al detalle y la organización. TTurismo Mexicano lo tiene todo. ¡Altamente recomendado!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Carlos Rodríguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Rodríguez</h4>
+                            <p>Monterrey</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Viajé sola y me sentí completamente segura en todo momento. Los guías son profesionales y conocen cada rincón. ¡Gracias por esta experiencia inolvidable!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Sánchez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Laura Sánchez</h4>
+                            <p>Guadalajara</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Reserva tu Tour</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p>Estamos ubicados en el corazón de Orizaba, listos para ayudarte a planear tu próxima aventura.</p>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>NoseDonde, Centro, Orizaba, Veracruz</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+52 271 755 114002</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@turismo mexicano.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Lunes a Sábado: 9:00 am - 7:00 pm</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact-form">
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tour">Tour de interés</label>
+                            <select id="tour" name="tour" required>
+                                <option value="">Selecciona un tour</option>
+                                <option value="orizaba">Orizaba Mágico</option>
+                                <option value="cafe">Ruta del Café</option>
+                                <option value="cascadas">Cascadas Secretas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Fecha preferida</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje adicional</label>
+                            <textarea id="message" name="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo"> Turismo <span>Mexicano</span></div>
+                <p>Vive México y el mundo sin preocupaciones</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 Tours The Mexican. Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/520000000000?text=Hola%20quiero%20información%20sobre%20sus%20tours" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+
+    <!-- Simple JavaScript for Form Submission -->
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const tour = document.getElementById('tour').value;
+            
+            // In a real implementation, you would send this data to your server
+            // For this MVP, we'll just show an alert
+            alert(`¡Gracias ${name}! Hemos recibido tu solicitud para el tour ${tour}. Nos pondremos en contacto contigo pronto.`);
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+
+<script>
+function toggleMenu() {
+    const nav = document.getElementById('navMenu').querySelector('ul');
+    nav.classList.toggle('show');
+}
+</script>
+</body>
+</html>
